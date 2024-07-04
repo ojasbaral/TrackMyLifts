@@ -22,7 +22,7 @@ CREATE TABLE exercises(
 	exercise_name VARCHAR(64) NOT NULL,
 	exercise_desc VARCHAR(200),
 	_split_id INT NOT NULL,
-	FOREIGN KEY (_split_id) REFERENCES splits(_split_id)
+	FOREIGN KEY (_split_id) REFERENCES splits(split_id)
 );
 
 DROP TABLE IF EXISTS sessions CASCADE;
@@ -30,10 +30,10 @@ CREATE TABLE sessions(
 	session_id SERIAL PRIMARY KEY,
 	session_date DATE NOT NULL DEFAULT CURRENT_DATE,
 	_split_id INT NOT NULL,
-	FOREIGN KEY (_split_id) REFERENCES splits(_split_id)
+	FOREIGN KEY (_split_id) REFERENCES splits(split_id)
 );
 
-DROP TABLE IF EXISTS sets CASCADE:
+DROP TABLE IF EXISTS sets CASCADE;
 CREATE TABLE sets(
 	set_id SERIAL PRIMARY KEY,
 	set_number INT NOT NULL,
@@ -42,5 +42,5 @@ CREATE TABLE sets(
 	_exercise_id INT NOT NULL,
 	_session_id INT NOT NULL,
 	FOREIGN KEY (_exercise_id) REFERENCES exercises(exercise_id),
-	FOREIGN KEY (_session_id) REFERENCES exercises(_session_id)
+	FOREIGN KEY (_session_id) REFERENCES sessions(session_id)
 );
